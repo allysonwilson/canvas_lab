@@ -3,19 +3,19 @@ var app = function() {
   var canvas = document.querySelector("#main-canvas");
   var context = canvas.getContext("2d");
 
-  var drawCircle = function(){}
+function drawCircle(){
 
   context.beginPath();
-  context.arc(300 + deltaX, 300 + deltaY, 40, 0, 2 * Math.PI, true);
+  context.arc(300 + deltaX, 300 + deltaY,5, 0, 2 * Math.PI, true);
   // x and y coordinates on screen, then radius, start angle, end angle, anticlockwise
-  context.stroke();
+  context.closePath();
 
   context.lineWidth = 5;
   context.strokeStyle = "rgba(102, 102, 102, 1)";
   context.stroke();
 
   // the fill color
-  context.fillStyle = "rgba(255, 204, 0, 1)";
+  context.fillStyle = "rgba(102, 102, 102, 1)";
   context.fill();
 }
 drawCircle();
