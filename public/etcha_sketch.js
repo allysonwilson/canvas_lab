@@ -3,6 +3,9 @@ var app = function() {
   var canvas = document.querySelector("#main-canvas");
   var context = canvas.getContext("2d");
 
+  var deltaX = 0;
+  var deltaY = 0;
+
 function drawCircle(){
 
   context.beginPath();
@@ -20,28 +23,62 @@ function drawCircle(){
 }
 drawCircle();
 
-window.addEventListener("keydown", moveSomething, false);
+var Keys = {
+  up: false,
+  down: false,
+  left: false,
+  right: false,
+}
+window.addEventListener("keydown", function(event) {
+  var kc = event.keyCode;
+  // event.preventDefault();
 
-var deltaX = 0;
-var deltaY = 0;
+  if (kc === 37 ) {Keys.left = true}
+  if (kc === 38 ) {Keys.up = true}
+  if (kc === 39 ) {Keys.right = true}
+  if (kc === 40 ) {Keys.down = true}
+
+  moveSomething();
+
+});
+
+window.addEventListener("keyup", function(event) {
+  var kc = event.keyCode;
+  // event.preventDefault();
+
+  if (kc === 37 ) {Keys.left = false}
+  if (kc === 38 ) {Keys.up = false}
+  if (kc === 39 ) {Keys.right = false}
+  if (kc === 40 ) {Keys.down = false}
+
+});
+
+
 
 function moveSomething(e) {
-    switch(e.keyCode) {
-        case 37:
-            deltaX -= 2;
-            break;
-        case 38:
-            deltaY -= 2;
-            break;
-        case 39:
-            deltaX += 2;
-            break;
-        case 40:
-            deltaY += 2;
-            break;
-    }
+  if (Keys.up) {
+    if (deltaY <= -300) {
+      deltaY = -298;}
+    else {deltaY -= 4;}
+  }
+  if (Keys.down) {
+    if (deltaY >= 300) {
+      deltaY = 298;}
+    else {deltaY += 4;}
+  }
+  if (Keys.left) {
+    if (deltaX <= -300) {
+      deltaX = -298;}
+    else {deltaX -= 4;}
+  }
+  if (Keys.right) {
+    if (deltaX >= 300) {
+      deltaX = 298;}
+    else {deltaX += 4;}
+  }
     drawCircle();
 }
+
 
 
 }
